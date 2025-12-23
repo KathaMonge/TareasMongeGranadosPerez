@@ -15,9 +15,7 @@ ERROR_INVALID_OP = -70
 ERROR_NON_NUMERIC = -80
 ERROR_LIST_TOO_LONG = -90
 
-
 # Inicio de la primera funcion estilo calculadora basica
-
 def operation_selector(num1, num2, op):
     """
     Selecciona y ejecuta una operacion matematica o logica entre dos enteros.
@@ -53,3 +51,28 @@ def operation_selector(num1, num2, op):
         return SUCCESS, num1 * num2
     if op == "&":
         return SUCCESS, num1 & num2
+
+# Inicio de la segunda funcion para el calculo de un promedio
+def calculo_promedio(lista_valores):
+    """
+    Calcula el promedio de una lista de valores numericos.
+
+    Parametros:
+        lista_valores (list): Lista de numeros
+
+    Retorna:
+        (codigo, resultado)
+    """
+    # Verificar tamaño maximo de la lista
+    if len(lista_valores) > 10:
+        return ERROR_LIST_TOO_LONG, None
+# Verificar que todos los elementos sean numeros (bool NO cuenta)
+    for elemento in lista_valores:
+        if not isinstance(elemento, (int, float)):
+            return ERROR_NON_NUMERIC, None
+        if isinstance(elemento, bool):
+            return ERROR_NON_NUMERIC, None
+
+    promedio = sum(lista_valores) / len(lista_valores)
+    return SUCCESS, promedio
+
